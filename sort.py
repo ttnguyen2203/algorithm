@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 
 
@@ -27,6 +28,32 @@ def merge_sort(ls):
 def bubble_sort(ls):
 	return None
 
+def quick_sort(ls):
+	#iterative
+	def partition(ls):
+		if len(ls) == 0  or len(ls) == 1:
+			return ls
+		pivot = random.choice(ls)
+		less = []
+		equal = []
+		greater = []
+		for n in ls:
+			if n > pivot:
+				greater.append(n)
+			elif n < pivot:
+				less.append(n)
+			else:
+				equal.append(n)
+		final = []
+		final.extend(partition(less))
+		final.extend(equal)
+		final.extend(partition(greater))
+		return final
+
+	return partition(ls)
+
+
+
 
 
 
@@ -34,7 +61,7 @@ def bubble_sort(ls):
 ls = list(np.random.rand(10))
 ls1 = [5, 3, 4, 2, 1,5, 3, 4, 2, 1]
 
-alg = insertion_sort(ls1)
+alg = quick_sort(ls1)
 truth = sorted(ls1)
 
 print(alg == truth)
